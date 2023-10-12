@@ -1,0 +1,30 @@
+﻿
+#account_desc > div
+{
+    max-height:none;
+}
+#account_desc > div.clear
+{
+    clear:none;
+}
+
+#sum>div
+{
+    max-height:none;
+}
+#cardinfo>div
+{
+    max-height:none;
+}
+#clientname>div
+{
+    max-height:none;
+}
+#expiredate>div
+{
+    max-height:none;
+}
+#cvv>div
+{
+    max-height:none;
+}

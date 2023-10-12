@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- saved from url=(0071)https://engine.paymentgate.ru/bpcservlet/BPC/AcceptPayment_example.html -->
+    <title>Ameriabank VPOS</title>
+    <link href="Styles/carddetails.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/carddetails_ru.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="Styles/carddetailsIEold.css" />
+    <script src="js/jscript.js"></script>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <!-- Place for IE css-s for futur development, it is not useing because css included --->
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="Styles/carddetailsIEold.css" />
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="Styles/carddetailsIEold.css" />
+    <![endif]-->
+    <!--[if IE 9]>
+    <link rel="stylesheet" type="text/css" href="Styles/carddetailsIEold.css" />
+    <![endif]-->
+    <!--[if IE 5]>
+    <link rel="stylesheet" type="text/css" href="Styles/carddetailsIEold.css" />
+    <![endif]-->
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="Styles/carddetailsIEold.css" />
+    <![endif]-->
+
+    <script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.timers-1.2.js"></script>
+	<script type="text/javascript" src="../../js/jquery.url.js"></script>
+	<script type="text/javascript" src="../../js/jquery.payment.js?1"></script>
+	<script type="text/javascript">
+	    $(document).payment({
+	        language: "ru",
+	        messageAjaxError: "Сервис временно недоступен. Попробуйте позднее.",
+	        messageTimeRemaining: "До окончания сессии осталось #MIN#:#SEC#",
+	        messageNoEpinForCard: "No EPin for card. Please use another card.",
+
+	        orderId: "orderNumber",
+
+	        paymentAction: "../../rest/processform.do",
+	        getSessionStatusAction: "../../rest/getSessionStatus.do",
+	        showErrorAction: "../../rest/showErrors.do",
+	        checkEpinAvailableForCardAction: "../../rest/checkEpinAvailableForCard.do",
+
+	        updatePage: function (data) {
+	            $("#orderNumber").text(data['orderNumber']);
+	            $("#amount").text(data['amount']);
+	            $("#description").text(data['description']);
+	        },
+
+	        addEpinField: function (settings) {
+	            if ($('#paymentDataTable .epinEntryRow')) {
+	                $('#paymentDataTable .epinEntryRow').remove();
+	            }
+	            $('#paymentDataTable tr:last').before('<tr class="epinEntryRow" valign="TOP"><td valign="top" width="50%" align="right"><span class="txt_white">E-Commerce PIN :</span></td><td valign="top"><input name="' + settings.ePinInputId + '" maxlength="4" id="' + settings.ePinInputId + '" type="password" autocomplete="off" /></td></tr>');
+	        },
+
+	        removeEpinField: function () {
+	            if ($('#paymentDataTable .epinEntryRow')) {
+	                $('#paymentDataTable .epinEntryRow').remove();
+	            }
+	        }
+	    });
+	    $(document).ready(function () {
+	        // unbind method to validate by ourside do not use getway validation
+	        $('#buttonPayment').unbind(); 
+	        $('#iCVC').unbind();
+	        $("#month").unbind();
+	        $("#year").unbind();
+	        $("#iTEXT").unbind();
+	        $("#iPAN").unbind();
+	    });
+    </script>
+
+</head>
+<body>
+    <div class="amerialogo">
+        <div style="float:left;">
+            <img id="amerialogo" src="images/ameriauserlogo.png" width="321px" height="42px" alt="amerialogo" />
+        </div>
+        <div style="float:right;">
+            <div id="numberCountdown"></div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="header">
+            <div class="info">
+                Просим заполнить данные Вашей платежной карты
+            </div>
+        </div>
+        <form name="PaymentForm" action="#" method="post" id="formPayment">
+        <input type="hidden" id="expiry" />
+        <input type="hidden" id="mdOrder" />
+        <input type="hidden" id="location" value="/../" />
+        <input type="hidden" id="language" value="ru" />
+        <div id="errorBlock" style="color:red;"></div>
+        <div id="infoBlock"></div>
+
+        <div id="orderNumber" style="display:none"></div>
+        <div id="fields">
+            <div id="account_desc" class="field_row">
+                <div class="field_type">
+                    <div class="field_type_text">
+                        Описание счета
+                    </div>
+                </div>
+                <div class="field_value">
+                    <div id="description" class="field_value_text">
+                            <!--Оплата счета -->
+                            Ameriabank Account Transfer
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div id="sum" class="field_row">
+                <div class="field_type">
+                    <div class="field_type_text">
+                        Сумма платежа
+                    </div>
+                </div>
+                <div class="field_value">
+                    <div class="field_value_text">
+                        <span id="amount">
+                        </span>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            
+            <div id="cardinfo" class="field_row">
+                <div class="field_type">
+                    <div class="field_type_text">
+                        Номер Вашей карты
+                    </div>
+                    <div class="pan_text">
+                        <div id="pan_text_value">
+                            16 цифр без пробелов
+                        </div>
+                    </div>
+                </div>
+                <div class="field_value">
+                    <div class="field_value_text">
+                        <div class="cardnumber">
+                            <input name="$PAN" maxlength="19" id="iPAN" onkeyup="isValidData()"
+                                   type="number" autocomplete="off" class="cardnumber_input" placeholder="4083060100073143">
+                        </div>
+                        <div id="error_pan" style="display:none">
+                            <div class="error_pan">
+                                <div id="error_pan_text">
+                                    *Неверный номер карты.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div id="clientname" class="field_row">
+                <div class="field_type">
+                    <div class="field_type_text">
+                        Ваше имя
+                    </div>
+                    <div class="clientname_text">
+                        <div id="clientname_text_value">
+                            Как указано на карте (пр. MR NAME SURNAME)
+                        </div>
+                    </div>
+                </div>
+                <div class="field_value">
+                    <div class="field_value_text">
+                        <div class="clientname">
+                            <input name="TEXT" maxlength="90" id="iTEXT" onkeyup="isValidData()"
+                                type="text" autocomplete="off" class="clientname_input" placeholder="JOHN SMITH"></div>
+                        <div id="error_clientname" style="display:none">
+                            <div class="error_clientname">
+                                <div id="error_clientname_text">
+                                    *Просим заполнить поле
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            
+            <div id="expiredate" class="field_row">
+                <div class="field_type">
+                    <div class="field_type_text">
+                        Дата окончания действия карты
+                    </div>
+                </div>
+                <div class="field_value">
+                    <div class="field_value_text">
+                        <div class="div_month">
+                            <select name="MM" onchange="fn_selectfocuschange()" id="month">
+                                <option value="-1"></option>
+                                <option value="01">&nbsp;&nbsp;1&nbsp;январь</option>
+                                <option value="02">&nbsp;&nbsp;2&nbsp;февраль</option>
+                                <option value="03">&nbsp;&nbsp;3&nbsp;март</option>
+                                <option value="04">&nbsp;&nbsp;4&nbsp;апрель</option>
+                                <option value="05">&nbsp;&nbsp;5&nbsp;май</option>
+                                <option value="06">&nbsp;&nbsp;6&nbsp;июнь</option>
+                                <option value="07">&nbsp;&nbsp;7&nbsp;июль</option>
+                                <option value="08">&nbsp;&nbsp;8&nbsp;август</option>
+                                <option value="09">&nbsp;&nbsp;9&nbsp;сентябрь</option>
+                                <option value="10">10&nbsp;октябрь</option>
+                                <option value="11">11&nbsp;ноябрь</option>
+                                <option value="12">12&nbsp;декабрь</option>
+                            </select>
+                        </div>
+                        <div class="div_years">
+                            <select name="YYYY" onchange="fn_selectfocuschange()" id="year">
+                                <option value="-1"></option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                            </select>
+                        </div>
+                        <div class="clear">
+                        </div>
+                        <div id="error_expiredate" style="display:none">
+                            <div class="error_expiredate">
+                                <div id="error_expiredate_text">
+                                    *Пожалуйста выберите дату окончания карты
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div id="cvv" class="field_row">
+                <div class="field_type">
+                    <div class="field_type_text">
+                        Код CVC2/CVV2:
+                    </div>
+                    <div class="cvv_text">
+                        <div id="cvv_text_value">
+                            Трехзначная цифра, которaя указана на обратной стороне карты
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="field_value">
+                    <div class="field_value_text">
+                        <div class="cvv">
+                            <input name="$CVC" maxlength="3" id="iCVC" onkeyup="isValidData()"
+                                   type="password" autocomplete="off" class="cvv_input" placeholder="123">
+                        </div>
+                        <div id="error_cvv" style="display: none">
+                            <div class="error_cvv">
+                                <div id="error_cvv_text">
+                                    *Просим заполнить поле
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+        <div class="submit">
+            <div class="submitwrapper">
+                <input value="ОПЛАТИТЬ" onclick="return setExpiry();" type="button" id="buttonPayment"
+                      class="submit_button">
+            </div>
+        </div>
+        </form>
+        <form id="acs" method="post" action=""><input type="hidden" id="MD" name="MD"/><input type="hidden" id="PaReq" name="PaReq"/><input type="hidden" id="TermUrl" name="TermUrl"/></form>
+    </div>
+    <div id="secure_wrapper">
+    <div id="secure_container">
+        <div id="cardslogo"></div>
+        <!--
+        <div id="mastercardsecure"></div>
+        <div id="visasecure"></div>
+        <div id="arca"></div>
+        <div class="clear"></div>-->
+        </div>
+    </div>
+    <div id="indicator" style="display:none;">
+        <div id="div_loader" class="div_loader">
+            <img alt="" id="imgLoader" src="images/loader.gif" />
+        </div>
+    </div>
+</body>
+</html>
