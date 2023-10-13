@@ -7,7 +7,7 @@
     <link href="Styles/carddetails_ru.css" rel="stylesheet" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="Styles/carddetailsIEold.css" />
-    <script src="js/jscript.txt"></script>
+    <script src="js/jscript.js"></script>
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <!-- Place for IE css-s for futur development, it is not useing because css included --->
     <!--[if IE 7]>
@@ -80,9 +80,7 @@
         <div style="float:left;">
             <img id="amerialogo" src="images/white-on-black-ameria-logo.png" width="64" alt="amerialogo" />
         </div>
-        <div style="float:right;">
-            <div id="numberCountdown"></div>
-        </div>
+
         <div class="clear">
         </div>
     </div>
@@ -90,6 +88,10 @@
         <div class="header">
             <div class="info">
                 Просим заполнить данные Вашей платежной карты
+            </div>
+
+            <div>
+                <div id="numberCountdown"></div>
             </div>
         </div>
         <form name="PaymentForm" action="#" method="post" id="formPayment">

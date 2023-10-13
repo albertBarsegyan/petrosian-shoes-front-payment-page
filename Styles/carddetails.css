@@ -1,7 +1,7 @@
 ﻿body
 {
     background-color: rgba(0, 0, 0, 0.63);
-    background-image: url("../images/main-background.png");
+    background-image: url("../images/main-background.jpg");
     width: 780px;
     margin: auto;
     margin-top: 10px;
@@ -17,7 +17,16 @@
     padding-top:18px;
     padding-bottom:18px;
     border:none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+#numberCountdown {
+    padding-right: 20px;
+    color: white;
+}
+
 .amerialogo
 {
     padding-left:5px;
@@ -32,7 +41,6 @@
 }
 .info
 {
-    margin-top:10px;
     margin-left:20px;
     margin-right:20px;
     font-size:18px;
