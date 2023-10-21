@@ -1,10 +1,10 @@
 ﻿body
 {
     background-color: rgba(0, 0, 0, 0.63);
-    background-image: url("../images/main-background.png");
+    background-image: url("../images/main-background.jpg");
     width: 780px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 40px;
     background-blend-mode: darken;
     background-size: contain;
     background-attachment: fixed;
@@ -17,16 +17,30 @@
     padding-top:18px;
     padding-bottom:18px;
     border:none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+#numberCountdown {
+    padding-right: 20px;
+    color: white;
+}
+
 .amerialogo
 {
-    padding-left:10px;
+    padding-left:5px;
     padding-top:20px;
     padding-bottom:10px;
+    display: flex;
+    justify-content: flex-end;
+}
+#amerialogo {
+    border-radius: 10px;
+    overflow: hidden;
 }
 .info
 {
-    margin-top:10px;
     margin-left:20px;
     margin-right:20px;
     font-size:18px;
@@ -85,6 +99,7 @@
     cursor:pointer;
     color:#ffffff;
     font-size:24px;
+    border-radius: 5px;
 }
 .submitwrapper
 {
@@ -355,155 +370,155 @@ select::-ms-expand {
 
 .div_loader>img
 {
-      display: inline;
-      top: 50%;
-      bottom: 0;
-      position: absolute;
-      left:45%;
+    display: inline;
+    top: 50%;
+    bottom: 0;
+    position: absolute;
+    left:45%;
 }
 
 /* Responsive */
 @media screen and (max-width: 649px) {
-	body
+    body
     {
         width:100%;
         margin:0px;
     }
 
-	#wrapper {
-		background-position: 0 0;
-		background-size: cover;
-		height: 1500px;
-		margin: 0 auto;
-		padding: 20px 0;
-		width: 280px !important
-	}
+    #wrapper {
+        background-position: 0 0;
+        background-size: cover;
+        height: 1500px;
+        margin: 0 auto;
+        padding: 20px 0;
+        width: 280px !important
+    }
 
-	/* this is ornage logic go back to their css
-	#content .iframe-box {
-		height: 1403px;
-		margin-left: -149px;
-		width: 290px;
-	}
+    /* this is ornage logic go back to their css
+    #content .iframe-box {
+        height: 1403px;
+        margin-left: -149px;
+        width: 290px;
+    }
 
-	#content .iframe-box iframe {
-		height: 1400px;
-		width: 290px;
-	}*/
+    #content .iframe-box iframe {
+        height: 1400px;
+        width: 290px;
+    }*/
 
 
-	.header {
-		width: 100%;
-	}
+    .header {
+        width: 100%;
+    }
 
-	/* Ameria bank */
+    /* Ameria bank */
 
-	.amerialogo {
-		padding: 50px 20px 0 !important;
+    .amerialogo {
+        padding:  50px 20px 0 5px !important;
         text-align:center;
-	}
+    }
 
-	.datestyle {
+    .datestyle {
         float:none;
-	}
+    }
 
-	.datevalue {
-		width: 100% !important;
-	}
+    .datevalue {
+        width: 100% !important;
+    }
 
-	.info {
-		line-height: 20px;
-	}
+    .info {
+        line-height: 20px;
+    }
 
-	.field_type {
-		width: 100% !important;
-	}
+    .field_type {
+        width: 100% !important;
+    }
 
-	.field_value  {
-		width: 100% !important;
-	}
+    .field_value  {
+        width: 100% !important;
+    }
 
-	.header {
-		height: auto !important;
-		padding-bottom: 10px;
-	}
+    .header {
+        height: auto !important;
+        padding-bottom: 10px;
+    }
 
-	#cvv > div.field_value,
-	#cvv > div.field_type,
-	#expiredate > div.field_value,
-	#expiredate > div.field_type,
-	#clientname > div.field_value,
-	#clientname > div.field_type,
-	#cardinfo > div.field_value,
-	#cardinfo > div.field_type,
-	#account_desc > div.field_value,
-	#account_desc > div.field_type,
-	#sum > div.field_value,
-	#sum > div.field_type {
-		height: auto !important;
-	}
+    #cvv > div.field_value,
+    #cvv > div.field_type,
+    #expiredate > div.field_value,
+    #expiredate > div.field_type,
+    #clientname > div.field_value,
+    #clientname > div.field_type,
+    #cardinfo > div.field_value,
+    #cardinfo > div.field_type,
+    #account_desc > div.field_value,
+    #account_desc > div.field_type,
+    #sum > div.field_value,
+    #sum > div.field_type {
+        height: auto !important;
+    }
 
-	.field_type_text, .field_value_text {
-		height: auto !important;
-		line-height: 25px !important;
-		position: static !important;
+    .field_type_text, .field_value_text {
+        height: auto !important;
+        line-height: 25px !important;
+        position: static !important;
         padding-left:20px;
-	}
+    }
 
-	.div_years select {
-		/*padding: 0 !important;*/
-	}
+    .div_years select {
+        /*padding: 0 !important;*/
+    }
 
-	.cardnumber_input,
-	.clientname_input,
-	.cvv_input {
-		/*background-color: #FFFFFF !important;
-		margin-left: -10px !important;*/
-		width: 90%;
-	}
+    .cardnumber_input,
+    .clientname_input,
+    .cvv_input {
+        /*background-color: #FFFFFF !important;
+        margin-left: -10px !important;*/
+        width: 90%;
+    }
 
-	#cardslogo{
-	   width: 376px;
+    #cardslogo{
+        width: 376px;
         display: none;
-	}
+    }
 
-	.wrapper {
-		overflow: hidden !important;
-		/*/width: 100% !important;*/
-	}
+    .wrapper {
+        overflow: hidden !important;
+        /*/width: 100% !important;*/
+    }
 
 
-	#pan_text_value,
-	#clientname_text_value,
+    #pan_text_value,
+    #clientname_text_value,
     #cvv_text_value  {
-		/*padding: 15px 10px !important;*/
-		width: auto !important;
-	}
+        /*padding: 15px 10px !important;*/
+        width: auto !important;
+    }
 
     .submitwrapper
     {
         margin-left:21px;
     }
 
-	#error_cvv,
-	#error_clientname,
-	#error_pan,
-	#error_clientname {
-		margin-top: -15px !important;
-	}
+    #error_cvv,
+    #error_clientname,
+    #error_pan,
+    #error_clientname {
+        margin-top: -15px !important;
+    }
 
-	#error_cvv_text,
-	#error_clientname_text,
-	#error_pan_text,
-	error_clientname_text {
-		padding: 10px 0 !important;
+    #error_cvv_text,
+    #error_clientname_text,
+    #error_pan_text,
+    error_clientname_text {
+        padding: 10px 0 !important;
         width:auto;
-	}
+    }
 
-	.cvv {
+    .cvv {
 
-		margin-left: -20px;
-	}
+        margin-left: -20px;
+    }
 
     .cvv_text,
     .clientname_text,
@@ -512,17 +527,17 @@ select::-ms-expand {
         padding-left:20px;
     }
 
-	#secure_wrapper {
-		width: 280px;
-	}
-	.cardnumber
-	{
-	   margin-left:-20px;
-	}
+    #secure_wrapper {
+        width: 280px;
+    }
+    .cardnumber
+    {
+        margin-left:-20px;
+    }
 
-	#secure_container {
-		top: 10px;
-	}
+    #secure_container {
+        top: 10px;
+    }
 
     .submitwrapper
     {
@@ -534,48 +549,48 @@ select::-ms-expand {
         width:96%;
     }
 
-	.cvv,
-	.cardnumber,
-	.clientname {
-		margin-left: 1px !important;
-	}
+    .cvv,
+    .cardnumber,
+    .clientname {
+        margin-left: 1px !important;
+    }
 
-	#error_pan,
-	#error_cvv,
-	#error_clientname,
-	#error_expiredate {
-		left: 10px !important;
+    #error_pan,
+    #error_cvv,
+    #error_clientname,
+    #error_expiredate {
+        left: 10px !important;
         width:auto;
-	}
+    }
 
-	#secure_wrapper {
-		width: inherit !important;
-	}
+    #secure_wrapper {
+        width: inherit !important;
+    }
 
-	#secure_container {
-		left: 0;
-		text-align: center;
-		/*width: 100%;*/
-	}
+    #secure_container {
+        left: 0;
+        text-align: center;
+        /*width: 100%;*/
+    }
 
-	#secure_container > div {
+    #secure_container > div {
         /*
 		display: inline-block;
 		float: none;*/
         margin-right:10px;
-	}
+    }
 
-	.header,
-	.submit {
-		border-radius: 0 !important;
-	}
+    .header,
+    .submit {
+        border-radius: 0 !important;
+    }
 
 }
 
 @media screen and (max-width: 330px){
-    #amerialogo{
-        width:100%;
-        height:100%;
+    #amerialogo {
+        /*width:100%;*/
+        /*height:100%;*/
     }
 }
 
@@ -588,16 +603,16 @@ input::-webkit-inner-spin-button {
 
 input[type=number]
 {
-   -moz-appearance:textfield;
+    -moz-appearance:textfield;
 }
 
 input[type=text],
 input[type=number],
 input[type=password]
 {
-   border-radius:5px;
-   padding-left: 5px;
-   padding-right: 5px;
+    border-radius:5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #amount>p

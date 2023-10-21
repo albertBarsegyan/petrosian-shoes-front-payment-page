@@ -25,11 +25,16 @@
     <!--[if IE 6]>
     <link rel="stylesheet" type="text/css" href="Styles/carddetailsIEold.css" />
     <![endif]-->
-
-    <script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-ui-1.9.2.custom.min.js"></script>
     <script type="text/javascript" src="../../js/jquery.timers-1.2.js"></script>
     <script type="text/javascript" src="../../js/jquery.url.js"></script>
-    <script type="text/javascript" src="../../js/jquery.payment.js"></script>
+    <script type="text/javascript" src="../../js/jquery.payment_new.js"></script>
+    <script type="text/javascript" src="../../js/maskedinput.js"></script>
+    <script type="text/javascript" src="../../js/jquery.main.js"></script>
+    <script type="text/javascript" src="../../js/select.js"></script>
+    <script type="text/javascript" src="../../js/localization.js"></script>
+
     <script type="text/javascript">
         $(document).payment({
             language: "hy",
@@ -76,8 +81,8 @@
 </head>
 <body>
     <div class="amerialogo">
-        <div style="float:left;">
-            <img id="amerialogo" src="images/white-on-black-ameria-logo.png" width="50px"  alt="amerialogo" />
+        <div style="display:none;">
+            <img id="amerialogo" src="images/ameriauserlogo.png" width="321px" height="42px" alt="amerialogo" />
         </div>
         <div style="float:right;">
             <div id="numberCountdown"></div>
@@ -285,6 +290,10 @@
         </div>
         </form>
         <form id="acs" method="post" action=""><input type="hidden" id="MD" name="MD"/><input type="hidden" id="PaReq" name="PaReq"/><input type="hidden" id="TermUrl" name="TermUrl"/></form>
+        <form id="threeDS2" method="post" action="">
+            <input type="hidden" id="CReq" name="creq"/>
+        </form>
+        <div id="threeDS2MethodDiv" style="visibility: hidden;"></div>
     </div>
     <div id="secure_wrapper">
     <div id="secure_container">
